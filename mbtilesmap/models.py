@@ -11,7 +11,7 @@ from landez.sources import MBTilesReader, ExtractionError, InvalidFormatError
 from landez.proj import GoogleProjection
 
 from . import app_settings
-from utils import reify
+from .utils import reify
 
 
 logger = logging.getLogger(__name__)
@@ -51,7 +51,7 @@ class MBTilesManager(object):
                 mb = MBTiles(os.path.join(self.folder, filename))
                 assert mb.name, _("%s name is empty !") % mb.id
                 yield mb
-            except (AssertionError, InvalidFormatError), e:
+            except (AssertionError, InvalidFormatError) as e:
                 logger.error(e)
 
     @property
@@ -159,7 +159,7 @@ class MBTiles(object):
 
     @property
     def middlezoom(self):
-        return self.zoomlevels[len(self.zoomlevels)/2]
+        return self.zoomlevels[len(self.zoomlevels)//2]
 
     @reify
     def zoomlevels(self):
